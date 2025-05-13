@@ -86,7 +86,7 @@ Les modèles en cuir sont également graissés, cirés et réimperméabilisés. 
                     { role: "system", content: "Tu es en charge de rédiger des annonces WooCommerce pour un site de vente d’équipement moto de seconde main reconditionné : SUNSET RIDER" },
                     { role: "user", content: prompt }
                 ],
-                temperature: 0.7
+                temperature: 1.2
             },
             {
                 headers: {
