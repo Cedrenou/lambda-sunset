@@ -22,6 +22,15 @@ exports.publishProduct = async (product, generated = {}) => {
             shortCategory === "chaussures" ? 1.5 :
                 shortCategory === "protection" ? 1 : 0;
 
+    // WoodMartNewLabelDate doit etre egal à la date du jour + 7 jours formatter comme ca  : 2023-10-01
+    const today = new Date();
+    const nextWeek = new Date(today);
+    nextWeek.setDate(today.getDate() + 7);
+    const year = nextWeek.getFullYear();
+    const month = String(nextWeek.getMonth() + 1).padStart(2, '0'); // Les mois commencent à 0
+    const day = String(nextWeek.getDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day}`;
+
     try {
         const res = await axios.get(`${config.woocommerceUrl}/wp-json/wc/v3/products`, {
             auth: { username: config.woocommerceKey, password: config.woocommerceSecret },
@@ -72,18 +81,24 @@ exports.publishProduct = async (product, generated = {}) => {
                 status: "draft",
                 meta_data: [
                     { key: "_wc_gla_brand", value: product.marque},
+                    { key: "fb_brand", value: product.marque},
                     { key: "_wc_gla_condition", value: product.etat?.toLowerCase().includes("neuf") ? "new" : "used" },
                     { key: "_wc_gla_gender", value: product.genre },
+                    { key: "_woosea_gender", value: product.genre },
                     { key: "_wc_gla_size", value: product.taille },
                     { key: "_wc_gla_color", value: "Noir" },
+                    { key: "fb_color", value: "Noir"},
                     { key: "_wc_gla_material", value: product.matiere},
-                    { key: "_wc_gla_age_group", value: "adult" },
+                    { key: "fb_material", value: product.matiere},
+                    { key: "_wc_gla_age_group", value: "Adult" },
+                    { key: "_woosea_age_group", value: "Adult"},
+                    { key: "fb_age_group", value: "Adult"},
                     { key: "_wc_gla_size_system", value: "EU" },
                     { key: "_wc_gla_size_type", value: product.taille},
                     { key: "_yoast_wpseo_title", value: `${generated.seotitle}`},
                     { key: "_yoast_wpseo_focuskw", value: `${generated.seoRegularExpression}`},
                     { key: "_yoast_wpseo_metadesc", value: `${generated.seoMetaDescription}`},
-                    { key: "_woosea_gender", value: product.genre },
+                    { key: "_woodmart_new_label_date", value: formattedDate },
                 ]
             },
             {
