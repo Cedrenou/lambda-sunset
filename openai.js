@@ -74,10 +74,10 @@ Les modèles en cuir sont également graissés, cirés et réimperméabilisés. 
 🔗 <strong><a href="https://sunsetridershop.com/guide-des-tailles/" target="_blank" rel="noopener noreferrer"><u>Guide des tailles</u></a></strong>",
     "seotitle": "${product.nom_produit} - ${product.genre === "female" ? 'Femme' : product.genre === "male" ? 'Homme' : 'Unisexe'} -  [expression clé SEO variable]
      L'expression clé SEO peut varier entre :
-        - équipement moto seconde main
-        - pantalon moto d’occasion
-        - blouson moto cuir seconde main
-        - vêtement motarde reconditionné
+        - équipement seconde main
+        - pantalon d’occasion
+        - blouson seconde main
+        - veste reconditionné
         - etc.
         Voici un exemple de titreSEO : "alpinestars bionic plus - m homme - seconde main"
         IMPORTANT : le seotitle ne doit pas dépasser 55 caractères (espaces compris) et doit être optimisé pour le SEO. Il doit contenir l'expression clé SEO choisie.
