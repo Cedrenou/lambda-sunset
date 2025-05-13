@@ -74,7 +74,9 @@ exports.publishProduct = async (product, generated = {}) => {
                     { key: "_wc_gla_size_system", value: "EU" },
                     { key: "_wc_gla_size_type", value: product.taille},
                     { key: "_yoast_wpseo_title", value: `${generated.seotitle}`},
-                    { key: "_yoast_wpseo_focuskw", value: `generated.seoRegularExpression`},
+                    { key: "_yoast_wpseo_focuskw", value: `${generated.seoRegularExpression}`},
+                    { key: "_yoast_wpseo_metadesc", value: `${generated.seoMetaDescription}`},
+                    { key: "_woosea_gender", value: product.genre },
                 ]
             },
             {
