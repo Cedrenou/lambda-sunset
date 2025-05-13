@@ -5,6 +5,16 @@ const config = require("./config");
 exports.publishProduct = async (product, generated = {}) => {
     const longDescription = generated.longdesc || "Description longue par défaut.";
     const shortDescription = generated.shortdesc || "Description courte par défaut.";
+    // Si product.categorie contient le mot "veste" cette variable sera égale à "veste", si elle contient "pantalon" elle sera égale à "pantalon", si elle contient "chaussure" elle sera égale à "chaussure", sinon elle sera égale à "autre".
+    const shortCategory =  product.categorie.toLowerCase().includes("veste") ? "veste" :
+        product.categorie.toLowerCase().includes("pantalon") ? "pantalon" :
+            product.categorie.toLowerCase().includes("protection") ? "protection" :
+                product.categorie.toLowerCase().includes("casual") ? "casual" :
+                    product.categorie.toLowerCase().includes("chaussures") ? "chaussures" : ""
+
+    // Choisir un slug aléatoire parmi les options
+    const slugLastPart = ['seconde-main', 'occasion', 'reconditionné']
+    const randomSlug = slugLastPart[Math.floor(Math.random() * slugLastPart.length)];
 
     try {
         const res = await axios.get(`${config.woocommerceUrl}/wp-json/wc/v3/products`, {
@@ -19,13 +29,14 @@ exports.publishProduct = async (product, generated = {}) => {
             `${config.woocommerceUrl}/wp-json/wc/v3/products/${productId}`,
             {
                 name: product.nom_produit,
+                slug: `${shortCategory}-${product.nom_produit.toLowerCase().replace(/ /g, "-")}-${randomSlug}`,
                 description: longDescription,
                 short_description: shortDescription,
                 sku: product.code_article,
                 size: product.taille || "N/A",
                 color: "Noir",
                 categories: [
-                    { name: product.categorie || "Divers" }
+                    { name: product.categorie}
                 ],
                 attributes: [
                     {

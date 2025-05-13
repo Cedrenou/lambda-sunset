@@ -72,7 +72,7 @@ Les modèles en cuir sont également graissés, cirés et réimperméabilisés. 
         - occasion
         - reconditionné
         - etc.
-        " 
+        "
 }`.trim();
 
 
