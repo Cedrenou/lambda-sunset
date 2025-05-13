@@ -72,14 +72,13 @@ Les modèles en cuir sont également graissés, cirés et réimperméabilisés. 
 \\n
 \\n
 🔗 <strong><a href="https://sunsetridershop.com/guide-des-tailles/" target="_blank" rel="noopener noreferrer"><u>Guide des tailles</u></a></strong>",
-    "seotitle": "${product.nom_produit} - ${product.genre === "female" ? 'Femme' : product.genre === "male" ? 'Homme' : 'Unisexe'} -  [expression clé SEO variable]
+    "seotitle": "${product.nom_produit} - ${product.genre === "female" ? 'Femme' : product.genre === "male" ? 'Homme' : 'Unisexe'} - [expression clé SEO variable]
      L'expression clé SEO peut varier entre :
         - équipement seconde main
         - pantalon d’occasion
         - blouson seconde main
         - veste reconditionné
         - etc.
-        Voici un exemple de titreSEO : "alpinestars bionic plus - m homme - seconde main"
         IMPORTANT : le seotitle ne doit pas dépasser 55 caractères (espaces compris) et doit être optimisé pour le SEO. Il doit contenir l'expression clé SEO choisie.
         ",
     "seoRegularExpression": "
@@ -108,7 +107,7 @@ Les modèles en cuir sont également graissés, cirés et réimperméabilisés. 
                     { role: "system", content: "Tu es en charge de rédiger des annonces WooCommerce pour un site de vente d’équipement moto de seconde main reconditionné : SUNSET RIDER" },
                     { role: "user", content: prompt }
                 ],
-                temperature: 1.2
+                temperature: 0.9
             },
             {
                 headers: {
