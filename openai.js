@@ -59,7 +59,8 @@ Les modèles en cuir sont également graissés, cirés et réimperméabilisés. 
         - blouson moto cuir femme seconde main
         - vêtement motarde reconditionné
         - etc.
-        Voici un exemple de titreSEO : "alpinestars bionic plus - m seconde main homme - équipement moto seconde main"
+        Voici un exemple de titreSEO : "alpinestars bionic plus - m homme - seconde main"
+        IMPORTANT : le seotitle ne doit pas dépasser 55 caractères (espaces compris) et doit être optimisé pour le SEO. Il doit contenir l'expression clé SEO choisie.
         "
 }
 `.trim();
