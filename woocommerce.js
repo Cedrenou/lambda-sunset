@@ -16,6 +16,12 @@ exports.publishProduct = async (product, generated = {}) => {
     const slugLastPart = ['seconde-main', 'occasion', 'reconditionné']
     const randomSlug = slugLastPart[Math.floor(Math.random() * slugLastPart.length)];
 
+    // Choisir le poid en fonction de la catgorie du produit , pour les veste 3kg, pour les pantalon 2kg, pour les chaussures 1,5kg, pour les protections 1kg
+    const weight = shortCategory === "veste" ? 3 :
+        shortCategory === "pantalon" ? 2 :
+            shortCategory === "chaussures" ? 1.5 :
+                shortCategory === "protection" ? 1 : 0;
+
     try {
         const res = await axios.get(`${config.woocommerceUrl}/wp-json/wc/v3/products`, {
             auth: { username: config.woocommerceKey, password: config.woocommerceSecret },
@@ -33,6 +39,7 @@ exports.publishProduct = async (product, generated = {}) => {
                 description: longDescription,
                 short_description: shortDescription,
                 sku: product.code_article,
+                weight: weight,
                 size: product.taille || "N/A",
                 color: "Noir",
                 categories: [
