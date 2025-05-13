@@ -58,6 +58,10 @@ exports.publishProduct = async (product, generated = {}) => {
                         variation: false
                     }
                 ],
+                yoast_head_json: {
+                    description: generated.seoMetaDescription,
+                    og_description: generated.seoMetaDescription
+                },
                 status: "draft",
                 meta_data: [
                     { key: "_wc_gla_brand", value: product.marque},
