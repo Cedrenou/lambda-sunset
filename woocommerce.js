@@ -90,7 +90,7 @@ exports.publishProduct = async (product, generated = {}) => {
                     { key: "fb_color", value: "Noir"},
                     { key: "_wc_gla_material", value: product.matiere},
                     { key: "fb_material", value: product.matiere},
-                    { key: "_wc_gla_age_group", value: "adult" },
+                    { key: "_wc_gla_ageGroup", value: "adult" },
                     { key: "_woosea_age_group", value: "adult"},
                     { key: "fb_age_group", value: "adult"},
                     { key: "_wc_gla_size_system", value: "EU" },
