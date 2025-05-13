@@ -21,9 +21,9 @@ Style : ${product.type}
 Voici le format que tu dois respecter dans ta réponse :
 {
 "longdesc": "(Description longue) IMPORTANT : 
-- 300 mots min 
+- 300 mots minimum découpé en deux à trois paragraphes. 
 – Optimisée SEO Yoast
-- Ajouter un lien externe vers la page produit qui correspond a la catégorie du produit (ex. : 
+- Ajouter un LIEN_EXTERNE vers la page produit qui correspond a la catégorie du produit (ex. : 
     - https://sunsetridershop.com/categorie-produit/veste-moto-homme-occasion/
     - https://sunsetridershop.com/categorie-produit/protection-accessoire-moto-occasion/
     - https://sunsetridershop.com/categorie-produit/chaussure-botte-moto-occasion/
@@ -57,10 +57,13 @@ Description personnalisée selon le type (blouson, pantalon, chaussures, protect
 Tous nos articles de seconde main sont nettoyés et désinfectés. \\n
 Les modèles en cuir sont également graissés, cirés et réimperméabilisés. \\n
 \n
-📩 Pour toute question : info@sunsetridershop.com",
-   "shortdesc": "
-   IMPORTANT : Si une donné est manquante, ne pas afficher du tout la donnée.
-   Structure :  
+📩 Pour toute question : info@sunsetridershop.com
+\\n
+\\n
+🔗 <strong><a href="Ajout ici le LIEN_EXTERNE qui correspond" target="_blank" rel="noopener noreferrer"><u>Découvrez notre sélection de CATEGORIE</u></a></strong>
+
+",
+   "shortdesc": "Structure :  
 • Taille : ${product.taille} ${product.genre} (Mesures en photo)
 • État : ${product.etat}
 • Protections : ${product.protections}
@@ -70,10 +73,10 @@ Les modèles en cuir sont également graissés, cirés et réimperméabilisés. 
 \\n
 🔗 <strong><a href="https://sunsetridershop.com/guide-des-tailles/" target="_blank" rel="noopener noreferrer"><u>Guide des tailles</u></a></strong>",
     "seotitle": "${product.nom_produit} - ${product.genre === "female" ? 'Femme' : product.genre === "male" ? 'Homme' : 'Unisexe'} -  [expression clé SEO variable]
- ➡️ L'expression clé SEO peut varier entre :
+     L'expression clé SEO peut varier entre :
         - équipement moto seconde main
         - pantalon moto d’occasion
-        - blouson moto cuir femme seconde main
+        - blouson moto cuir seconde main
         - vêtement motarde reconditionné
         - etc.
         Voici un exemple de titreSEO : "alpinestars bionic plus - m homme - seconde main"
@@ -86,6 +89,11 @@ Les modèles en cuir sont également graissés, cirés et réimperméabilisés. 
         - occasion
         - reconditionné
         - etc.
+         ➡️ La catégorie du produit Homme ou Femme tu mettra : 
+         - si c'est une Textile : Veste
+         - si c'est un cuir : Blouson
+         - si c'est un pantalon : Pantalon
+         - ...
         ",
     "seoMetaDescription": "140 à 155 caractères (espaces compris) - Optimisé SEO Yoast. Unique, fluide, sans répétition, avec mots-clés pertinents, résumé clair et concis du produit, sans majuscule abusives, sans fautes d'orthographe, sans répétitions, sans balises HTML, sans mise en forme markdown. Doit contenir l'expression clé SEO choisie."
 }`.trim();
