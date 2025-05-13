@@ -47,7 +47,7 @@ Les modèles en cuir sont également graissés, cirés et réimperméabilisés. 
    "shortdesc": "
    IMPORTANT : Si une donné est manquante, ne pas afficher du tout la donnée.
    Structure :  
-• Taille : ${product.taille} + Genre et numéro après taille si présent, exemple M/52 (Mesures en photo)
+• Taille : ${product.taille} ${product.genre} (Mesures en photo)
 • État : ${product.etat}
 • Protections : ${product.protections}
 • Doublure : ${product.doublure}
