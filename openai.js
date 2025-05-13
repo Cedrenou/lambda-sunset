@@ -63,12 +63,12 @@ Les modèles en cuir sont également graissés, cirés et réimperméabilisés. 
 🔗 <strong><a href="Ajout ici le LIEN_EXTERNE qui correspond" target="_blank" rel="noopener noreferrer"><u>Découvrez notre sélection de CATEGORIE</u></a></strong>
 
 ",
-   "shortdesc": "
-• Taille : ${product.taille} ${product.genre} (Mesures en photo)
-• État : ${product.etat}
-• Protections : ${product.protections}
-• Doublure : ${product.doublure}
-• Matière : ${product.matiere}
+   "shortdesc": "Garde toujours cette structure :
+• Taille : ${product.taille} ${product.genre === "female" ? 'Femme' : product.genre === "male" ? 'Homme' : 'Unisexe'} (Mesures en photo) \\n
+• État : ${product.etat} \\n
+• Protections : ${product.protections} \\n
+• Doublure : ${product.doublure} \\n
+• Matière : ${product.matiere} \\n
 \\n
 \\n
 🔗 <strong><a href="https://sunsetridershop.com/guide-des-tailles/" target="_blank" rel="noopener noreferrer"><u>Guide des tailles</u></a></strong>",
@@ -83,7 +83,7 @@ Les modèles en cuir sont également graissés, cirés et réimperméabilisés. 
         IMPORTANT : le seotitle ne doit pas dépasser 55 caractères (espaces compris) et doit être optimisé pour le SEO. Il doit contenir l'expression clé SEO choisie.
         ",
     "seoRegularExpression": "
-        IMPORTANT : le seoRegularExpression doit être optimisé pour le SEO. Il doit etre structuré comme suit : [La catégorie du produit] + ${product.nom_produit} + ${product.genre} +  [expression clé SEO variable]
+        IMPORTANT : le seoRegularExpression doit être optimisé pour le SEO. Il doit etre structuré comme suit : [La catégorie du produit] + ${product.nom_produit} + ${product.genre === "female" ? 'Femme' : product.genre === "male" ? 'Homme' : 'Unisexe'} +  [expression clé SEO variable]
          ➡️ L'expression clé SEO peut varier entre :
         - seconde main
         - occasion
