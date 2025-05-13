@@ -65,8 +65,15 @@ Les modèles en cuir sont également graissés, cirés et réimperméabilisés. 
         Voici un exemple de titreSEO : "alpinestars bionic plus - m homme - seconde main"
         IMPORTANT : le seotitle ne doit pas dépasser 55 caractères (espaces compris) et doit être optimisé pour le SEO. Il doit contenir l'expression clé SEO choisie.
         "
-}
-`.trim();
+        "seoRegularExpression": "
+        IMPORTANT : le seoRegularExpression doit être optimisé pour le SEO. Il doit etre structuré comme suit : [La catégorie du produit] + ${product.nom_produit} + ${product.genre} +  [expression clé SEO variable]
+         ➡️ L'expression clé SEO peut varier entre :
+        - seconde main
+        - occasion
+        - reconditionné
+        - etc.
+        " 
+}`.trim();
 
 
     try {
