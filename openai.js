@@ -63,7 +63,7 @@ Les modèles en cuir sont également graissés, cirés et réimperméabilisés. 
 🔗 <strong><a href="Ajout ici le LIEN_EXTERNE qui correspond" target="_blank" rel="noopener noreferrer"><u>Découvrez notre sélection de CATEGORIE</u></a></strong>
 
 ",
-   "shortdesc": "Structure :  
+   "shortdesc": "
 • Taille : ${product.taille} ${product.genre} (Mesures en photo)
 • État : ${product.etat}
 • Protections : ${product.protections}
