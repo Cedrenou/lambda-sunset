@@ -44,8 +44,11 @@ Tous nos articles de seconde main sont nettoyés et désinfectés. \\n
 Les modèles en cuir sont également graissés, cirés et réimperméabilisés. \\n
 \n
 📩 Pour toute question : info@sunsetridershop.com",
-   "shortdesc": "• Taille : ${product.taille} + Genre et numéro après taille si présent, exemple M/52 (Mesures en photo)
-• État : ${product.etat},
+   "shortdesc": "
+   IMPORTANT : Si une donné est manquante, ne pas afficher du tout la donnée.
+   Structure :  
+• Taille : ${product.taille} + Genre et numéro après taille si présent, exemple M/52 (Mesures en photo)
+• État : ${product.etat}
 • Protections : ${product.protections}
 • Doublure : ${product.doublure}
 • Matière : ${product.matiere}
