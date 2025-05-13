@@ -20,7 +20,21 @@ Style : ${product.type}
 
 Voici le format que tu dois respecter dans ta réponse :
 {
-    "longdesc": "Description longue (300 mots min – Optimisée SEO Yoast)
+"longdesc": "(Description longue) IMPORTANT : 
+- 300 mots min 
+– Optimisée SEO Yoast
+- Ajouter un lien externe vers la page produit qui correspond a la catégorie du produit (ex. : 
+    - https://sunsetridershop.com/categorie-produit/veste-moto-homme-occasion/
+    - https://sunsetridershop.com/categorie-produit/protection-accessoire-moto-occasion/
+    - https://sunsetridershop.com/categorie-produit/chaussure-botte-moto-occasion/
+    - https://sunsetridershop.com/categorie-produit/pantalon-moto-occasion-homme/
+    - https://sunsetridershop.com/categorie-produit/sportswear-casual-occasion-homme/
+    - https://sunsetridershop.com/categorie-produit/veste-moto-femme-occasion/
+    - https://sunsetridershop.com/categorie-produit/sportswear-casual-occasion-femme/
+    - https://sunsetridershop.com/categorie-produit/protection-accessoire-moto-occasion/
+    - https://sunsetridershop.com/categorie-produit/chaussure-botte-moto-occasion/
+    - https://sunsetridershop.com/categorie-produit/pantalon-moto-occasion-femme/
+    )
     Structure :
 Un sous-titre avec le format : <strong>Nom du produit – État</strong> (ex. : Alpinestars Andes – Très bon état)
 \\n
