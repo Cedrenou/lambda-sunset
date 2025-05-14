@@ -2,7 +2,6 @@ const axios = require("axios");
 const config = require("./config");
 
 exports.generateDescriptions = async (product) => {
-    console.log("📝 Génération de descriptions pour le produit :", product);
     const prompt = `
     IMPORTANT :
 - NE FOURNIS AUCUNE MISE EN FORME MARKDOWN (pas de balises ou blocs de type "code").
@@ -134,7 +133,6 @@ Les modèles en cuir sont également graissés, cirés et réimperméabilisés. 
             throw new Error("Le JSON ne contient pas toutes les clés attendues.");
         }
 
-        console.log("✅ Contenu généré :", generatedJSON);
         return generatedJSON;
 
     } catch (error) {
