@@ -29,8 +29,6 @@ exports.parseCSVFromS3 = async (bucket, key) => {
                     cleaned[clean] = data[rawKey]?.trim();
                 });
 
-                console.log("Colonne CSV :", cleaned);
-
                 // Mapping du produit avec les champs personnalisés
                 const product = {
                     code_article: cleaned.code_article || "",

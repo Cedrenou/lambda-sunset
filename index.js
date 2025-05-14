@@ -13,7 +13,6 @@ exports.handler = async (event) => {
         const products = await parseCSVFromS3(bucket, key);
 
         for (const product of products) {
-            console.log("Traitement du produit:", product);
             const generated = await generateDescriptions(product);
             await publishProduct(product, generated);
         }
