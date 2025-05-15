@@ -31,6 +31,33 @@ exports.publishProduct = async (product, generated = {}) => {
     const day = String(nextWeek.getDate()).padStart(2, '0');
     const formattedDate = `${year}-${month}-${day}`;
 
+
+    // Liste des catégories telles qu'elles existent dans WooCommerce
+    const CATEGORIES_BY_LABEL = [
+        { id: 25, name: "Blouson et veste moto Homme" },
+        { id: 26, name: "Blouson et veste moto Femme" },
+        { id: 29, name: "Sportswear et Casual Homme" },
+        { id: 30, name: "Sportswear et Casual Femme" },
+        { id: 28, name: "Protection et accessoire" },
+        { id: 24, name: "Pantalon Homme" },
+        { id: 250, name: "Pantalon Femme" },
+        { id: 27, name: "Chaussures et bottes" },
+        { id: 246, name: "Non classé" }
+    ];
+
+    // Fonction qui fait la correspondance "intelligente"
+    function resolveCategorieId(categorieCsv) {
+        const lower = (categorieCsv || "").toLowerCase().trim();
+
+        const found = CATEGORIES_BY_LABEL.find(cat => cat.name.toLowerCase() === lower);
+        if (found) return found.id;
+
+        console.warn("❗️Catégorie non trouvée, fallback vers 'Non classé' :", categorieCsv);
+        return 246; // ID de 'Non classé'
+    }
+
+
+
     try {
         const res = await axios.get(`${config.woocommerceUrl}/wp-json/wc/v3/products`, {
             auth: { username: config.woocommerceKey, password: config.woocommerceSecret },
@@ -39,6 +66,8 @@ exports.publishProduct = async (product, generated = {}) => {
 
         const productId = res.data[0]?.id;
         if (!productId) throw new Error(`Aucun produit trouvé avec le SKU ${product.code_article}`);
+
+        console.log(`INFO Produit ${product.categorie}`);
 
         const updateRes = await axios.put(
             `${config.woocommerceUrl}/wp-json/wc/v3/products/${productId}`,
@@ -52,24 +81,24 @@ exports.publishProduct = async (product, generated = {}) => {
                 size: product.taille || "N/A",
                 color: "Noir",
                 categories: [
-                    { name: product.categorie}
+                    { id: resolveCategorieId(product.categorie)}
                 ],
                 attributes: [
                     {
-                        name: "Taille",
-                        options: [product.taille || "N/A"],
+                        id: 7, // Taille
+                        options: [product.taille],
                         visible: true,
                         variation: false
                     },
                     {
-                        name: "Matière",
-                        options: [product.matiere || "N/A"],
+                        id: 8, // Matiere
+                        options: [product.matiere],
                         visible: true,
                         variation: false
                     },
                     {
-                        name: "Marque",
-                        options: [product.marque || "N/A"],
+                        id: 5, // Marque
+                        options: [product.marque],
                         visible: true,
                         variation: false
                     }
