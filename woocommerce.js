@@ -34,8 +34,8 @@ exports.publishProduct = async (product, generated = {}) => {
 
     // Liste des catégories telles qu'elles existent dans WooCommerce
     const CATEGORIES_BY_LABEL = [
-        { id: 25, name: "Blouson et veste moto Homme" },
-        { id: 26, name: "Blouson et veste moto Femme" },
+        { id: 25, name: "Blouson et veste Homme" },
+        { id: 26, name: "Blouson et veste Femme" },
         { id: 29, name: "Sportswear et Casual Homme" },
         { id: 30, name: "Sportswear et Casual Femme" },
         { id: 28, name: "Protection et accessoire" },
@@ -55,8 +55,6 @@ exports.publishProduct = async (product, generated = {}) => {
         console.warn("❗️Catégorie non trouvée, fallback vers 'Non classé' :", categorieCsv);
         return 246; // ID de 'Non classé'
     }
-
-
 
     try {
         const res = await axios.get(`${config.woocommerceUrl}/wp-json/wc/v3/products`, {
