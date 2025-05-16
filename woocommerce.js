@@ -55,6 +55,19 @@ exports.publishProduct = async (product, generated = {}) => {
         return 246; // ID de 'Non classé'
     }
 
+
+    function formatSize(sive) {
+        if (sive === "3XL" || sive === "4XL") {
+            return "3XL / 4XL";
+        } else if (sive === "5XL" || sive === "6XL") {
+            return "5XL / 6XL";
+        } else if (sive === "XS" || sive === "XXS") {
+            return "XXS / XS";
+        }
+
+        return (sive || "").split("/")[0].trim();
+    }
+
     try {
         const res = await axios.get(`${config.woocommerceUrl}/wp-json/wc/v3/products`, {
             auth: { username: config.woocommerceKey, password: config.woocommerceSecret },
@@ -83,7 +96,7 @@ exports.publishProduct = async (product, generated = {}) => {
                 attributes: [
                     {
                         id: 7, // Taille
-                        options: [product.taille.split("/")[0].trim()],
+                        options: [formatSize(product.taille)],
                         visible: true,
                         variation: false
                     },
