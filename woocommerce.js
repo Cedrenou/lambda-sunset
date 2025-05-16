@@ -22,7 +22,6 @@ exports.publishProduct = async (product, generated = {}) => {
             shortCategory === "chaussures" ? 1.5 :
                 shortCategory === "protection" ? 1 : 0;
 
-    // WoodMartNewLabelDate doit etre egal à la date du jour + 7 jours formatter comme ca  : 2023-10-01
     const today = new Date();
     const nextWeek = new Date(today);
     nextWeek.setDate(today.getDate() + 7);
@@ -84,7 +83,7 @@ exports.publishProduct = async (product, generated = {}) => {
                 attributes: [
                     {
                         id: 7, // Taille
-                        options: [product.taille],
+                        options: [product.taille.split("/")[0].trim()],
                         visible: true,
                         variation: false
                     },
