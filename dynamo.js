@@ -23,7 +23,10 @@ exports.getLambdaConfig = async (lambdaName = "uploadProductToWooCommerce") => {
     try {
         const params = {
             TableName: "ClientLambdas",
-            Key: { lambdaName }
+            Key: {
+                clientId: "clientA", // ou une variable
+                lambdaName: "uploadProductToWooCommerce"
+              }
         };
         
         console.log("📡 Paramètres de la requête DynamoDB:", JSON.stringify(params, null, 2));
