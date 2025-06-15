@@ -15,7 +15,7 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "🗜️  Compression du code..."
-zip -r $ZIP_FILE index.js parser.js openai.js woocommerce.js prompts.js s3.js config.js package.json node_modules
+zip -r $ZIP_FILE index.js parser.js dynamo.js openai.js woocommerce.js prompts.js s3.js config.js package.json node_modules 
 
 if [ $? -ne 0 ]; then
     echo "❌ Échec de la création de l'archive."
