@@ -1,101 +1,23 @@
 const axios = require("axios");
 const config = require("./config");
+const { getGptPrompt } = require("./dynamo");
 
 exports.generateDescriptions = async (product) => {
-    const prompt = `
-    IMPORTANT :
-- NE FOURNIS AUCUNE MISE EN FORME MARKDOWN (pas de balises ou blocs de type "code").
-- N'AJOUTE AUCUN TEXTE AVANT OU APRÈS LE JSON.
-- Fournis uniquement le JSON valide.
-
-Ton objectif est de créer une description marketing attrayante et détaillée pour une fiche produit WooCommerce.
-
-Données du produit :
-Nom : ${product.nom_produit}
-Catégorie : ${product.categorie}
-Taille : ${product.taille}
-État : ${product.etat}
-Style : ${product.type}
-
-Voici le format que tu dois respecter dans ta réponse :
-{
-"longdesc": "(Description longue) IMPORTANT : 
-- 300 mots minimum découpé en deux à trois paragraphes. 
-– Optimisée SEO Yoast
-- Ajouter un LIEN_EXTERNE vers la page produit qui correspond a la catégorie du produit (ex. : 
-    - https://sunsetridershop.com/categorie-produit/veste-moto-homme-occasion/
-    - https://sunsetridershop.com/categorie-produit/protection-accessoire-moto-occasion/
-    - https://sunsetridershop.com/categorie-produit/chaussure-botte-moto-occasion/
-    - https://sunsetridershop.com/categorie-produit/pantalon-moto-occasion-homme/
-    - https://sunsetridershop.com/categorie-produit/sportswear-casual-occasion-homme/
-    - https://sunsetridershop.com/categorie-produit/veste-moto-femme-occasion/
-    - https://sunsetridershop.com/categorie-produit/sportswear-casual-occasion-femme/
-    - https://sunsetridershop.com/categorie-produit/protection-accessoire-moto-occasion/
-    - https://sunsetridershop.com/categorie-produit/chaussure-botte-moto-occasion/
-    - https://sunsetridershop.com/categorie-produit/pantalon-moto-occasion-femme/
-    )
-    Structure :
-Un sous-titre avec le format : <strong>Nom du produit – État</strong> (ex. : Alpinestars Andes – Très bon état)
-\\n
-Introduction directe avec une expression clé (ex. : blouson moto cuir seconde main femme, pantalon moto d’occasion, vêtement moto reconditionné, etc.). L'expression clé doit apparaître au moins deux fois.
-Texte structuré avec phrases courtes (< 20 mots dans 75 % des cas).
-Voix active (90 % min.).
-Description personnalisée selon le type (blouson, pantalon, chaussures, protections, etc.) En t'aidant des informations suivantes : ${product.indications}.
-
-
-✅ <strong>Avantages</strong>
-• Premier avantage
-• Deuxième avantage
-• Troisième avantage
-
-🔗 <strong><a href="https://sunsetridershop.com/guide-des-tailles/" target="_blank" rel="noopener noreferrer"><u>Guide des tailles</u></a>
-</strong>
-
-🛠️ <strong>Engagements Sunset Rider</strong>
-100% Satisfait ou Remboursé. \\n
-Tous nos articles de seconde main sont nettoyés et désinfectés. \\n
-Les modèles en cuir sont également graissés, cirés et réimperméabilisés. \\n
-\n
-📩 Pour toute question : info@sunsetridershop.com
-\\n
-\\n
-🔗 <strong><a href="Ajout ici le LIEN_EXTERNE qui correspond" target="_blank" rel="noopener noreferrer"><u>Découvrez notre sélection de CATEGORIE</u></a></strong>
-
-",
-   "shortdesc": "Garde toujours cette structure :
-• Taille : ${product.taille} ${product.genre === "female" ? 'Femme' : product.genre === "male" ? 'Homme' : 'Unisexe'} (Mesures en photo) \\n
-• État : ${product.etat} \\n
-• Protections : ${product.protections} \\n
-• Doublure : ${product.doublure} \\n
-• Matière : ${product.matiere} \\n
-\\n
-\\n
-🔗 <strong><a href="https://sunsetridershop.com/guide-des-tailles/" target="_blank" rel="noopener noreferrer"><u>Guide des tailles</u></a></strong>",
-    "seotitle": "${product.nom_produit} - ${product.genre === "female" ? 'Femme' : product.genre === "male" ? 'Homme' : 'Unisexe'} - [expression clé SEO variable]
-     L'expression clé SEO peut varier entre :
-        - équipement seconde main
-        - pantalon d’occasion
-        - blouson seconde main
-        - veste reconditionné
-        - etc.
-        IMPORTANT : le seotitle ne doit pas dépasser 55 caractères (espaces compris) et doit être optimisé pour le SEO. Il doit contenir l'expression clé SEO choisie.
-        ",
-    "seoRegularExpression": "
-        IMPORTANT : le seoRegularExpression doit être optimisé pour le SEO. Il doit etre structuré comme suit : [La catégorie du produit] + ${product.nom_produit} + ${product.genre === "female" ? 'Femme' : product.genre === "male" ? 'Homme' : 'Unisexe'} +  [expression clé SEO variable]
-         ➡️ L'expression clé SEO peut varier entre :
-        - seconde main
-        - occasion
-        - reconditionné
-        - etc.
-         ➡️ La catégorie du produit Homme ou Femme tu mettra : 
-         - si c'est une Textile : Veste
-         - si c'est un cuir : Blouson
-         - si c'est un pantalon : Pantalon
-         - ...
-        ",
-    "seoMetaDescription": "140 à 155 caractères (espaces compris) - Optimisé SEO Yoast. Unique, fluide, sans répétition, avec mots-clés pertinents, résumé clair et concis du produit, sans majuscule abusives, sans fautes d'orthographe, sans répétitions, sans balises HTML, sans mise en forme markdown. Doit contenir l'expression clé SEO choisie."
-}`.trim();
-
+    // Récupère le prompt depuis DynamoDB
+    const promptTemplate = await getGptPrompt();
+    
+    // Remplace les variables dans le template
+    const prompt = promptTemplate
+        .replace(/\${product\.nom_produit}/g, product.nom_produit)
+        .replace(/\${product\.categorie}/g, product.categorie)
+        .replace(/\${product\.taille}/g, product.taille)
+        .replace(/\${product\.etat}/g, product.etat)
+        .replace(/\${product\.type}/g, product.type)
+        .replace(/\${product\.genre}/g, product.genre)
+        .replace(/\${product\.indications}/g, product.indications || '')
+        .replace(/\${product\.protections}/g, product.protections || '')
+        .replace(/\${product\.doublure}/g, product.doublure || '')
+        .replace(/\${product\.matiere}/g, product.matiere || '');
 
     try {
         const response = await axios.post(
@@ -103,7 +25,7 @@ Les modèles en cuir sont également graissés, cirés et réimperméabilisés. 
             {
                 model: "gpt-4o",
                 messages: [
-                    { role: "system", content: "Tu es en charge de rédiger des annonces WooCommerce pour un site de vente d’équipement moto de seconde main reconditionné : SUNSET RIDER" },
+                    { role: "system", content: "Tu es en charge de rédiger des annonces WooCommerce pour un site de vente d'équipement moto de seconde main reconditionné : SUNSET RIDER" },
                     { role: "user", content: prompt }
                 ],
                 temperature: 0.9
