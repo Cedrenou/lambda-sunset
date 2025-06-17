@@ -1,8 +1,6 @@
 const { parseCSVFromS3 } = require("./parser");
 const { generateDescriptions } = require("./openai");
 const { publishProduct } = require("./woocommerce");
-const { moveFileToProcessed } = require("./s3");
-const config = require("./config");
 
 exports.handler = async (event) => {
     try {
@@ -17,7 +15,6 @@ exports.handler = async (event) => {
             await publishProduct(product, generated);
         }
 
-        await moveFileToProcessed(bucket, key);
         console.log("Traitement terminé.");
     } catch (error) {
         console.error("Erreur dans le handler:", error);
