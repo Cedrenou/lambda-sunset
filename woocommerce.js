@@ -13,7 +13,7 @@ exports.publishProduct = async (product, generated = {}) => {
                     product.categorie.toLowerCase().includes("chaussures") ? "chaussures" : ""
 
     // Choisir un slug aléatoire parmi les options
-    const slugLastPart = ['seconde-main', 'occasion', 'reconditionné']
+    const slugLastPart = ['seconde-main', 'occasion']
     const randomSlug = slugLastPart[Math.floor(Math.random() * slugLastPart.length)];
 
     // Choisir le poid en fonction de la catgorie du produit , pour les veste 3kg, pour les pantalon 2kg, pour les chaussures 1,5kg, pour les protections 1kg
