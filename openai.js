@@ -23,7 +23,7 @@ exports.generateDescriptions = async (product) => {
         const response = await axios.post(
             "https://api.openai.com/v1/chat/completions",
             {
-                model: "gpt-5",
+                model: "gpt-4o",
                 messages: [
                     { role: "system", content: "Tu es en charge de rédiger des annonces WooCommerce pour un site de vente d'équipement moto de seconde main occasion : SUNSET RIDER" },
                     { role: "user", content: prompt }
